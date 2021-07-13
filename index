@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="browser.css">
+<script src="hide.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+<style>
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+#dock-container {
+            position: fixed;
+            bottom: 0;
+            text-align: center;
+            right: 20%;
+            left: 20%;
+            width: 60%;
+            background-image:linear-gradient(to right, midnightblue,transparent,midnightblue);
+            border-radius: 10px 10px 0 0;
+            border: 3px solid black;
+        }
+        #dock-container li {
+            list-style-type: none;
+            display: inline-block;
+            position: relative;
+        }
+        #dock-container li img {
+          width: 64px;
+          height: 64px;
+          -webkit-box-reflect: below 2px
+                    -webkit-gradient(linear, left top, left bottom, from(transparent),
+                    color-stop(0.7, transparent), to(rgba(255,255,255,.5)));
+          -webkit-transition: all 0.3s;
+          -webkit-transform-origin: 50% 100%;
+        }
+         #dock-container li:hover img { 
+          -webkit-transform: scale(2);
+          margin: 0 2em;
+        }
+        #dock-container li:hover + li img,
+        #dock-container li.prev img {
+          -webkit-transform: scale(1.5);
+          margin: 0 1.5em;
+        }
+         #dock-container li:hover img { 
+          -webkit-transform: scale(2);
+          margin: 0 2em;
+        }
+        #dock-container li:hover + li img,
+        #dock-container li.prev img {
+          -webkit-transform: scale(1.5);
+          margin: 0 1.5em;
+        }
+         #dock-container li span {
+            display: none;
+            position: absolute;
+            bottom: 140px;
+            left: 0;
+            width: 100%;
+            background-color:black;
+            padding: 4px 0;
+            border-radius: 4px;
+        }
+        #dock-container li:hover span {
+            display: block;
+            color: #fff;
+        }
+        
+body {
+  font-family: 'Lato', sans-serif;
+background: url("macOSBigSur.jpg");
+overflow:hidden;
+}
+.overlay {
+  height: 0%;
+  width: 500px;
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  left:50px;
+  background-color: #eee;
+  border-radius:10px;
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay a {
+  padding: 0.01px;
+  text-decoration: none;
+  width:50px;
+  height:50px;
+
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  color: black;
+  font-size:30px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay {overflow-y: auto;}
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+.overlay1 {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background: rgba(200,200,200,0.6);
+  overflow-x: hidden;
+  transition: 0.5s;
+  border-radius:30px;
+}
+
+.overlay-content1 {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay1 a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: black;
+  transition: 0.3s;
+}
+
+.overlay1 a:hover, .overlay1 a:focus {
+  color: white;
+  background: blue;
+border-radius:10px;
+width:100px;
+
+}
+
+.overlay1 .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay1 a {font-size: 20px}
+  .overlay1 .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+#btn:hover{  color: white;
+  background: blue;
+border-radius:50%;
+width:100px;}
+.slider {
+  -webkit-appearance: none;
+  width: 1.5in;
+  border-radius:50px;
+  height: 25px;
+  background: midnightblue;
+  outline: none;
+  opacity: 0.9;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  border-radius:50%;
+  height: 25px;
+  background: white;
+  cursor: pointer;
+}
+.overlay2 {
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(10,10,10, 0.9);
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content2 {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay2 a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #c0c0c0;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay2 a:hover, .overlay2 a:focus {
+  color: lightgreen;
+}
+
+.overlay2 .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay2 {overflow-y: auto;}
+  .overlay2 a {font-size: 20px}
+  .overlay2 .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+#navbar {
+  overflow: hidden;
+  background-color: midnightblue;
+margin:-10px;
+}
+
+/* Navbar links */
+#navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+/* Page content */
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 60px;
+}
+.search{border: 2px solid black; color: Black; padding: 5px 5px 5px 5px; background: #ddd; border-radius:20px;}
+.overlay4 {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content4 {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay4 a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay4 a:hover, .overlay4 a:focus {
+  color: #f1f1f1;
+}
+
+.overlay4 .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay4 a {font-size: 20px}
+  .overlay4 .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
+}
+#ac{ color:white; font-size:30px;}
+#ac:hover{ color:white; font-size:30px;}
+#name{float:left: font-size:10px; color:lightgreen;}
+</style>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  background-color: #bbb;
+  border-radius: 60%;
+  display: inline-block;
+}
+
+.container {
+  border: 3px solid midnightblue;
+border-radius:28px;
+width:500px;
+height:500px;
+}
+
+.top {
+  padding: 10px;
+  background: midnightblue;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width:495px;
+}
+
+.content {
+  padding: 10px;
+  width:495px;
+height:455px;
+border-bottom-left-radius:30px;
+border-bottom-right-radius:30px;
+background:white;
+}
+</style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#draggable" ).draggable();
+  } );
+  </script>
+</head>
+<body>
+<div class="navigations">
+<div id="myNav2" class="overlay1">
+  <a class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content1">
+    <a href="#" id="btn"><i class="fa fa-wifi"></i></a>
+    <a href="#" id="btn"><i class="fa fa-battery"></i></a>
+    <a><i class="fa fa-volume-up"><input type="range" min="1" max="100" value="50" class="slider" id="myRange"></i></a>
+    <a href="#" id="btn"><i class="fa fa-wifi"></i></a>
+  </div>
+</div>
+<div id="myNav" class="overlay">
+  <a class="closebtn" onclick="closeNav1()">&times;</a>
+  <div class="overlay-content">
+  <h2 style="color:black; font-align:center;"> 메뉴 </h2>
+    <a onclick="Files()"><img src="icon-2.png"/></a>
+    <a onclick="DerTunes()"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+    <a href="#"><img src="icon-2.png"/></a>
+
+  </div>
+</div>
+<div id="myNav3" class="overlay2">
+  <a class="closebtn" onclick="closeNav3()">&times;</a>
+  <div class="overlay-content2">
+    <a> DerOS 11을 종료하시겠습니까? </a>
+    <a href="#">일시 휴업</a>
+    <a href="#">재시작</a>
+    <a href="#">자다</a>
+    <a href="#">로그 오프</a>
+  </div>
+</div>
+<div id="myNav4" class="overlay4">
+  <a class="closebtn" onclick="closeNav4()">&times;</a>
+  <div class="overlay-content4">
+<a id="name"> 조치 및 알림 센터 </a>
+<a id="ac">________________________________</a>
+<a id="ac"> 알림 없음 </a>
+<a id="ac">________________________________</a>
+<a id="ac"> 행동할 필요가 없다 </a>
+<a id="ac">________________________________</a>
+  </div>
+</div>
+<div id="navbar">
+  <a id="clock"></a>
+  <a href="#none"><i class="fa fa-diamond"></i></a>
+<div class="dropdown">
+    <button class="dropbtn"> 데릭 저스틴 P Ronquillo <i class="fa fa-user-circle"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#Search" style="color:black;"> 젠더 Ronquillo <i class="fa fa-user-circle"></i></a>
+<a href="#Search" style="color:black;"> 존마크 Ronquillo <i class="fa fa-user-circle"></i></a>
+<a href="#Search" style="color:black;"> 최예빈 <i class="fa fa-user-circle"></i></a>
+    </div>
+  </div>
+ <div class="dropdown">
+    <button class="dropbtn">검색
+      <i class="fa fa-search"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#Search" style="color:black;"><input type="search" class="search" placeholder="뭔가를 검색"></a>
+    </div>
+  </div>
+</div>
+</div>
+<div class="browsers">
+
+<div id="FilesCon">
+<div id="draggable" class="ui-widget-content">
+<div class="container">
+  <div class="top">
+    <a onclick="Files()" class="dot" style="background-color:Red;"></a>
+    <span class="dot" style="background-color:lightblue;"></span>
+    <span class="dot" style="background-color:lightblue;"></span>
+  </div>
+
+  <div class="content">
+    <h3>Browser Window</h3>
+    <p>How to create a browser window look with CSS.</p>
+  </div>
+</div>
+</div>
+</div>
+<div id="DerTunesCon">
+<div id="draggable" class="ui-widget-content">
+<div class="container">
+  <div class="top">
+    <a onclick="DerTunes()" class="dot" style="background-color:Red;"></a>
+    <span class="dot" style="background-color:lightblue;"></span>
+    <span class="dot" style="background-color:lightblue;"></span>
+  </div>
+
+  <div class="content">
+    <h3>Browser Window</h3>
+    <p>How to create a browser window look with CSS.</p>
+  </div>
+</div>
+</div>
+</div>
+<div id="FilesCon">
+<div id="draggable" class="ui-widget-content">
+<div class="container">
+  <div class="top">
+    <a onclick="Files()" class="dot" style="background-color:Red;"></a>
+    <span class="dot" style="background-color:lightblue;"></span>
+    <span class="dot" style="background-color:lightblue;"></span>
+  </div>
+
+  <div class="content">
+    <h3>Browser Window</h3>
+    <p>How to create a browser window look with CSS.</p>
+  </div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="dock-container">
+ <div id="dock">
+   <ul>
+      <li>
+        <span>메뉴</span>
+        <a onclick="openNav1()"><img src="Menu.png"/></a>
+      </li>
+      <li>
+        <span>시즌</span>
+        <a onclick="openNav3()"><img src="Se.png"/></a>
+      </li>
+      <li>
+         <span>제어 센터</span>
+         <a onclick="openNav()"><img src="Control.png"/></a>
+      </li>
+      <li>
+         <span>액션 센터</span>
+         <a onclick="openNav4()"><img src="Action.png"/></a>
+      </li>
+   </ul>
+ </div>
+</div>
+
+<script>
+function openNav4() {
+  document.getElementById("myNav4").style.width = "100%";
+}
+
+function closeNav4() {
+  document.getElementById("myNav4").style.width = "0%";
+}
+</script>
+<script>
+// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the navbar
+var navbar = document.getElementById("navbar");
+
+// Get the offset position of the navbar
+var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
+<script>
+function openNav3() {
+  document.getElementById("myNav3").style.height = "100%";
+}
+
+function closeNav3() {
+  document.getElementById("myNav3").style.height = "0%";
+}
+</script>
+<script>
+function openNav() {
+  document.getElementById("myNav2").style.width = "100%";
+}
+
+function closeNav() {
+  document.getElementById("myNav2").style.width = "0%";
+}
+</script>
+<script>
+function openNav1() {
+  document.getElementById("myNav").style.height = "100%";
+}
+
+function closeNav1() {
+  document.getElementById("myNav").style.height = "0%";
+}
+</script>
+</body>
+</html>
