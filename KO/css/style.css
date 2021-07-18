@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow:hidden;
+    height: 100%;
+    background: url("macOSBigSur.jpg");
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.taskbar {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #06005C;
+    z-index: 3;
+}
+
+.startMenu {
+    position: absolute;
+    bottom: -650px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.4s ease-in;
+    background: url(assets/start-menu.png);
+}
+
+.startMenu img {
+    max-width: 40%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.right {
+    justify-self: flex-end;
+    position: absolute;
+    right: 0;
+    margin: 6px 0;
+    height: 85%;
+}
